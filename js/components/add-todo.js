@@ -16,6 +16,7 @@ export default class AddTodo {
                 // console.error('incorrecto');
                 this.alert.show('Title and description are required');
             } else{
+                this.alert.hide();
                 callback(this.title.value, this.description.value);
             }
         }

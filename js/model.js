@@ -1,8 +1,8 @@
 export default class Model {
-    constructor(){
+    constructor() {
         this.view = null;
         this.todos = JSON.parse(localStorage.getItem('todos'));
-        if (!this.todos || this.todos.length < 1 ){
+        if (!this.todos || this.todos.length < 1) {
             this.todos = [
                 {
                     id: 0,
@@ -18,27 +18,30 @@ export default class Model {
 
     }
 
-    setView(view){
+    setView(view) {
         this.view = view
     }
 
-    save(){
+    save() {
         localStorage.setItem('todos', JSON.stringify(this.todos));
     }
-    getTodos(){
+    
+    getTodos() {
         return this.todos;
     }
-    findTodo(id){
+
+    findTodo(id) {
         return this.todos.findIndex((todo) => todo.id === id);
     }
-    toggleCompleted(id){
+
+    toggleCompleted(id) {
         const index = this.findTodo(id);
         const todo = this.todos[index];
         todo.completed = !todo.completed;
-        console.log(this.todos);
+        this.save();
     }
 
-    addTodo(title, description){
+    addTodo(title, description) {
         const todo = {
             id: this.currentId++,
             title,
@@ -49,10 +52,10 @@ export default class Model {
         console.log(this.todos);
         // return Object.assign({}, todo);
         this.save();
-        return {...todo}
+        return { ...todo }
     }
 
-    removeTodo (id){
+    removeTodo(id) {
         const index = this.findTodo(id);
         this.todos.splice(index, 1);
         this.save();
