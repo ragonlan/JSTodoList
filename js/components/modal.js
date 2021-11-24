@@ -1,3 +1,5 @@
+import Alert from './alert.js';
+
 export default class modal {
     constructor() {
         this.title = document.getElementById('modal-title');
@@ -5,9 +7,11 @@ export default class modal {
         this.btn = document.getElementById('modal-btn');
         this.completed = document.getElementById('modal-completed');
         this.todo = null;
+        this.alert = new Alert('modal-alert');
     }
 
     setValues(todo){
+        // $('#modal').modal('toggle');
         this.todo = todo;
         this.title.value = todo.title;
         this.description.value = todo.description;
@@ -16,10 +20,12 @@ export default class modal {
 
     onClick(callback){
         this.btn.onclick = () => {
-            if (title.value === '' || description.value === '' ){
+            if (!this.title.value || ! this.description.value){
                 this.alert.show('Title and description are required');
                 return;
             }
+
+            this.alert.hide();
 
             $('#modal').modal('toggle');
 

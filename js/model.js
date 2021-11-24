@@ -27,7 +27,8 @@ export default class Model {
     }
     
     getTodos() {
-        return this.todos;
+        // return this.todos;
+        return this.todos.map((todos) => ({...todos}));
     }
 
     findTodo(id) {
@@ -38,6 +39,12 @@ export default class Model {
         const index = this.findTodo(id);
         const todo = this.todos[index];
         todo.completed = !todo.completed;
+        this.save();
+    }
+
+    editTodo(id, values) {
+        const index = this.findTodo(id);
+        Object.assign(this.todos[index], values);
         this.save();
     }
 
